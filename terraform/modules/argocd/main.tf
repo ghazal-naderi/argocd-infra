@@ -6,5 +6,5 @@ resource "helm_release" "argocd" {
   namespace  = var.namespace
   create_namespace = true
   lint = true
-  values = [var.values]
+  values = [var.values, file("./modules/argocd/templates/argocd-configs/argocd-cm.yaml")]
 }
