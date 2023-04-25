@@ -12,7 +12,7 @@ spec:
   project: appbundle-project-dev
   source:
     path: kustomized_helm/overlays/dev
-    repoURL: https://github.com/brevanhowardinfra/hello-world-argocd-runtime
+    repoURL: https://github.com/ghazal-naderi/hello-world-argocd-runtime
     targetRevision: HEAD
     plugin:
       name: kustomized-helm
