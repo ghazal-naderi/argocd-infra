@@ -7,7 +7,7 @@ The AMI Bakery repository provides the foundations for configuring, building and
 
 A base image is first created. Any subsequent images must be built using this base image as the source. Once a new AMI is built and approved it is deployed to Contino AWS Dev Account
 
-## AMI Build Design
+## App of Apps Parent App repo Design
 
 ![arch](assets/AMI-bakery-steps.svg)
 
