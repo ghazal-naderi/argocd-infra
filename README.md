@@ -18,10 +18,9 @@ A base image is first created. Any subsequent images must be built using this ba
 # Prerequisites 
 GitHub runner needs to have below tools installed 
 
-* `packer`
-* `ansible`
-* `Git`
-* `jq`
+* `A Kubernetes cluster`
+* `ArgoCD running on the Kubernetes cluster with kustomize-heml plugin`
+
 
 ## Tools In Use
 * [Packer](https://packer.io) - Orchestration of the automated creation of machine images.
