@@ -21,62 +21,44 @@ GitHub runner needs to have below tools installed
 * `ArgoCD running on the Kubernetes cluster with kustomize-heml plugin`
 
 
-## Tools In Use
-* [Packer](https://packer.io) - Orchestration of the automated creation of machine images.
-* [Ansible](https://ansible.com) - Configuration management of the images to be built.
-* [Make](https://www.gnu.org/software/make/manual/make.html) - Run and compile your programs more efficiently
-
-## Images
-The *rhel9.0* image uses Red Hat Enterprise Linux (RHEL) 90 as its source. 
-All other images are built from this base image
-
-
 ## Building A New Image
 To create a new image, you can use the skeleton provided in `bakery/images/example-ami`. Just copy this  folder and paste it under `bakery/images`. Change the name of your AMI and then change each of the following files as required:
 * `ansible/playbook.yml` - this file contains ansible config code to provison software/apps on top of source (base) image
 * `packer-variables.json` - this file contains packer variables for image being build (e.g. source/base image information, name and tag of ami being created)
 
-### Packer Configuration
+### Argocd Configuration
 A single global `ami-bakery.pkr.hcl` file is used for all builds, and is parameterised with variables per image. See `bakery/images/<name>/packer-variables.json`.
 
 **Useful Information** 
 `global-packer-variables.pkrvars.hcl` contains global parameters for packer such as VPC/Subnet ID/AWS region where temp EC2 instance will be provisioned. Note that these ids should correspond to a valid VPC and a public subnet within it. Otherwise, packer builder will be unable to SSH to temp EC2 instance.
 
 
-### Ansible Playbook
-Ansible is used as a provisioner to configure the image. The Ansible playbook used to define roles and variables to use for a new image is `bakery/images/<ami-name>/ansible/playbook.yml`. Any roles used should be from Ansible Galaxy
-
-### Choosing An Image To Build
-The AMI Bakery uses a script `scripts/ami-to-build.sh` to determine which image(s) it should build when pushing to the remote. This script works by reading the git commit history and finding which files changed in the previous commit - it then finds which AMI folder these files belong to, in order to determine the image name.
-If no AMI files have changed, it will build `rhel9.0-base` by default. Otherwise it will build any AMIs that have changed.
-Any AMIs that have changed will be built in parallel.
-
-### Security Scanning
-Trivy is used ro AMIs security scanning, when the image has completed building packer creates the `<ami-name>-manifest.json` and the ami-id is extracted form the file with use of `scan.sh`
-This script also runs a Trivy docker container 
-
 ### Debugging
 Packer can easily be put into debug mode in which it'll write a temporary SSH key to disk and pause before each command. Simply set the environment variable `DEBUG=true` when calling `make build`. This can be useful if you need to SSH into a build to find out why a build failed.
-
-### AMI Versioning:
-
-Currently workflow tags ami's as following.
--   under `/bakery/images/` there are three images `example-ami, hello-world` and `rhel9.0-base`.
--   `rheal9.0-base` : base image (parent)
--   `example-ami`: child image
--   `hello-world`: child image
-- you can build child image together i.e `example-ami, hello-world`
-- It will fail buiding Parent and child as it should be. Parent image must be buils first.
- i.e `example-ami, rheal9.0-base`.
-- Do not build parent and child together because child would not get latest updates from parent image.
-- It tags incrementaly from `0.0.0`. Current tag will be applied to child OR parents image. As current logic applies currentl tag to all building images. 
-i.e : if a current tag is `0.0.2` and apply changes to `example-ami` it takes current tag `example-ami-0.0.2` as starting point and updates to `example-ami-0.0.3`.
 
 
 ### Create the Dev Project
 Once we’ve got our repos registered, the project needs to be created which create to encapsulate our application. as following the best practice of having a different project per environment.
 
+`kubectl apply -f argocd/projects/project-dev.yml`
 
+
+
+### Create the Root App
+
+
+to create our Root App in ArgoCD run the following command.
+
+`kubectl apply -f argocd/root-app-dev.yml`
+As soon as we create our app, we can see it on the ArgoCD console with the status says Missing and OutOfSync. ArgoCD recognizes the Root App and its  children! It means that it knows that there are Application manifests for the children, and also even found them, but they haven’t actually been created in Kubernetes. In order to do that, we must run an argocd app sync.
+
+### Create the Root App
+To sync the Root App used the web UI sync botton.
+
+### Create the Root App Cleanup
+
+As we are make use of app of apps patern in when we delete the Root App, by default it deletes the Child Apps and all of their resourcesthat includes namespaces too. So we end up with a very clean delete.
 
 # Future Improvements
+
 1. 
