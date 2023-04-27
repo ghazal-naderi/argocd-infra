@@ -1,6 +1,6 @@
 # argocd-infra
 
-# AMI Bakery
+# App of Apps Parent App repo
 
 ## What is AMI bakery?
 The AMI Bakery repository provides the foundations for configuring, building and distributing Amazon Machine Images (AMIs) to be used within the Contino AWS Account.
