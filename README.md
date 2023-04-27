@@ -3,9 +3,8 @@
 # App of Apps Parent App repo
 
 ## What is AMI bakery?
-The AMI Bakery repository provides the foundations for configuring, building and distributing Amazon Machine Images (AMIs) to be used within the Contino AWS Account.
+The xxx repository provides the foundations for configuring, building a tool to  create an app that creates other apps, which in turn can create other apps. This allows us to declaratively manage a group of apps that can be deployed and configured in concert.
 
-A base image is first created. Any subsequent images must be built using this base image as the source. Once a new AMI is built and approved it is deployed to Contino AWS Dev Account
 
 ## App of Apps Parent App repo Design
 
