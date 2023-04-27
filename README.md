@@ -74,15 +74,10 @@ Currently workflow tags ami's as following.
 i.e : if a current tag is `0.0.2` and apply changes to `example-ami` it takes current tag `example-ami-0.0.2` as starting point and updates to `example-ami-0.0.3`.
 
 
-### IAM roles associated with Runner
-Packer uses IAM permission associated with Runner Instance profile. In order for packer to work properly, minimal set permissions are needed. These can be referred at [Packer Buider Authentication Document](https://developer.hashicorp.com/packer/plugins/builders/amazon#authentication).
-Current runner did not have these IAM policies and hence we had to add these manually. This could be taken as an improvement on AWS Infrastructure as Code that stands up the runner.
+### Create the Dev Project
+Once we’ve got our repos registered, the project needs to be created which create to encapsulate our application. as following the best practice of having a different project per environment.
+
 
 
 # Future Improvements
-1. Concurrent Builds per image: At present if the first image in array it fails on buikd step it stops workflow.
-It should build the second image regardless of first one failing.  
-2. Pipeline must `fail` when `Critical` and `High` vulnerabilities are detected.
-3. SSH inbound on EC2 runners should be limited to Github IPs
-4. Runners should be started as a service
-5. Runners should be able to obtain runner token dynamically
+1. 
