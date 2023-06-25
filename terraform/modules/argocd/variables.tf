@@ -1,7 +1,11 @@
-variable "env" {
-  description = "The deployment environment"
-  type = string
-  default = "dev"
+variable "businessunit" {
+  description = "Business unit this cluster belongs to"
+  type        = string
+  default     = "mo"
+  validation {
+    condition     = contains(["mo", "fo"], var.businessunit)
+    error_message = "Valid values for 'businessunit' variable are (mo, fo)."
+  }
 }
 
 variable "namespace" {
@@ -10,33 +14,38 @@ variable "namespace" {
   default     = "argocd"
 }
 
-variable "chart_version" {
+variable "argocd_chart_version" {
   description = "Argo CD Helm chart version to use"
   type        = string
-  default = ""
+  default     = ""
+}
+
+variable "argocd_apps_chart_version" {
+  description = "Argo CD Apps Helm chart version to use"
+  type        = string
+  default     = ""
 }
 
 variable "cluster_name" {
-  description = "EKS cluster name"
-  type    = string
+  description = "Name of the EKS Cluster. Must be between 1-100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9-_]+$)."
+  type        = string
 }
 
-variable "cluster_endpoint" {
-  description = "EKS cluster endpoint"
-  type    = string
+variable "account_name" {
+  description = "Name of the AWS account."
+  type        = string
 }
 
-variable "cluster_ca_certificate" {
-  description = "EKS cluster CA certificate"
-  type    = string
+variable "repositories_values" {
+  description = "A YAML formatted list of repository values for Argo CD to create a repository connection with"
+  default     = ""
 }
 
-variable "values" {
-  description = "Path to JSON formatted values file"
+variable "applications_values" {
+  description = "A YAML formatted list of application values for Argo CD to deploy"
+  default     = ""
 }
 
-variable "additional_tags" {
-  description = "Tags to add to deployed module"
-  type = map(string)
-  default = {}
+variable "projects_values" {
+  default = ""
 }
