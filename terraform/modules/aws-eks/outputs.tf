@@ -19,3 +19,13 @@ output "cluster_iam_role_arn" {
   description = "IAM role ARN of the EKS cluster."
   value       = aws_iam_role.eks_cluster.arn
 }
+
+output "aws_iam_openid_connect_provider_arn" {
+  description = ""
+  value       = aws_iam_openid_connect_provider.eks.arn
+}
+
+output "aws_iam_openid_connect_provider_url" {
+  description = ""
+  value       = aws_iam_openid_connect_provider.eks.url
+}
