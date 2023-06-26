@@ -1,6 +1,6 @@
 module "cluster-autoscaler" {
   #source = "git::https://github.com/brevanhowardinfra/tf-aws-bh-eks-core-infra.git//terraform/modules/cluster-autoscaler?ref=tf-bh-argocd-0.2.0"
-  source = "../../../terraform/modules/cluster-autoscaler"
+  source = "../../../terraform/modules/autoscaler"
 
   account_name                        = local.account_name
   cluster_name                        = local.cluster_name

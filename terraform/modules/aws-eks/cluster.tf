@@ -9,12 +9,12 @@ resource "aws_eks_cluster" "cluster" {
     # endpoint_public_access  = false
   }
 
-  encryption_config {
-    provider {
-      key_arn = aws_kms_key.environment_kms_key.arn
-    }
-    resources = ["secrets"]
-  }
+  # encryption_config {
+  #   provider {
+  #     key_arn = aws_kms_key.environment_kms_key.arn
+  #   }
+  #   resources = ["secrets"]
+  # }
 
   enabled_cluster_log_types = var.enabled_cluster_log_types
 
@@ -71,6 +71,6 @@ resource "aws_iam_role_policy_attachment" "ElasticLoadBalancingFullAccess" {
 resource "aws_cloudwatch_log_group" "control_plane_logging" {
   name              = "/aws/eks/${var.cluster_name}/cluster"
   retention_in_days = var.cluster_log_retention
-  kms_key_id        = aws_kms_key.environment_kms_key.arn
+  # kms_key_id        = aws_kms_key.environment_kms_key.arn
   tags              = merge(var.default_tags, var.common_tags, var.additional_tags)
 }

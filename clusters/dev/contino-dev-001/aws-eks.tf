@@ -11,37 +11,37 @@ module "eks_cluster" {
   cluster_name = local.cluster_name
   kube_version = "1.27"
 
-  vpc_id = "vpc-0d62e65c938615dcb"
+  vpc_id = "vpc-05e1a10dc679128bd"
   private_subnet_ids = [
-    "subnet-02003c5e3a3318a12",
-    "subnet-05738f005af533c38",
-    "subnet-0e9b2916fa76b2cbb"
+    "subnet-09a21275cd1edc9c1",
+    "subnet-072c1779470b87895",
+    "subnet-0109f53eb70f9c49d"
   ]
 
-  aws_auth_roles = [
-    {
-      rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${one(data.aws_iam_roles.admin.names)}"
-      username = "AD-admin"
-      groups   = ["system:masters"]
-    },
-    {
-      rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${one(data.aws_iam_roles.dev.names)}"
-      username = "AD-developer"
-      groups   = ["system:masters"]
-    }
-  ]
-  aws_auth_users = [
-    {
-      userarn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/ci-user"
-      username = "ci-user"
-      groups   = ["system:masters"]
-    },
-    {
-      userarn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/external-secrets"
-      username = "external-secrets"
-      groups   = ["system:masters"]
-    }
-  ]
+  # aws_auth_roles = [
+  #   {
+  #     rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${one(data.aws_iam_roles.admin.names)}"
+  #     username = "AD-admin"
+  #     groups   = ["system:masters"]
+  #   },
+  #   {
+  #     rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${one(data.aws_iam_roles.dev.names)}"
+  #     username = "AD-developer"
+  #     groups   = ["system:masters"]
+  #   }
+  # ]
+  # aws_auth_users = [
+  #   {
+  #     userarn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/ci-user"
+  #     username = "ci-user"
+  #     groups   = ["system:masters"]
+  #   },
+  #   {
+  #     userarn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/external-secrets"
+  #     username = "external-secrets"
+  #     groups   = ["system:masters"]
+  #   }
+  # ]
 
   desired_size   = 2
   max_size       = 5

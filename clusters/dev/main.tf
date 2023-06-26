@@ -8,7 +8,7 @@ locals {
   }
 }
 
-# module "contino-dev-001" {
-#   source      = "./contino-dev-001"
-#   common_tags = local.common_tags
-# }
+module "contino-dev-001" {
+  source      = "./contino-dev-001"
+  common_tags = local.common_tags
+}

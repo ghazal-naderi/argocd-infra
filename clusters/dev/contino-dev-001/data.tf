@@ -23,16 +23,16 @@ data "aws_vpcs" "this" {
   }
 }
 
-data "aws_vpc" "this" {
-  id = one(data.aws_vpcs.this.ids[*])
-}
+# data "aws_vpc" "this" {
+#   id = one(data.aws_vpcs.this.ids[*])
+# }
 
-data "aws_subnets" "this" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.this.id]
-  }
-  tags = {
-    Name = "eks1-*"
-  }
-}
+# data "aws_subnets" "this" {
+#   filter {
+#     name   = "vpc-id"
+#     values = [data.aws_vpc.this.id]
+#   }
+#   tags = {
+#     Name = "eks1-*"
+#   }
+# }
