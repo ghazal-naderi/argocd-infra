@@ -1,0 +1,7 @@
+- url: https://github.com/brevanhowardinfra/tf-aws-bh-eks-core-infra
+  passwordSecret:
+    name: bh-gh
+    key: password
+  usernameSecret:
+    name: bh-gh
+    key: username
