@@ -1,7 +1,0 @@
-- url: https://github.com/ghazal-naderi/argocd-infra
-  passwordSecret:
-    name: bh-gh
-    key: password
-  usernameSecret:
-    name: bh-gh
-    key: username
