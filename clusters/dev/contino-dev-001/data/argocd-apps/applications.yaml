@@ -1,0 +1,18 @@
+- name: dev-app-quantrisk-root-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  project: dev-app-of-apps-project
+  source:
+    repoURL: https://github.com/brevanhowardcore/argocd-quantrisk-root-app
+    targetRevision: HEAD
+    path: child-apps/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev-app-quantrisk-root-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,21 @@
+- url: https://github.com/brevanhowardcore/argocd-quantrisk-root-app
+  passwordSecret:
+    name: bh-gh
+    key: password
+  usernameSecret:
+    name: bh-gh
+    key: username
+- url: https://github.com/brevanhowardcore/quantrisk__risk-testwebservice-runtime
+  passwordSecret:
+    name: bh-gh
+    key: password
+  usernameSecret:
+    name: bh-gh
+    key: username
+- url: https://github.com/brevanhowardcore/hello-world-argocd-runtime
+  passwordSecret:
+    name: bh-gh
+    key: password
+  usernameSecret:
+    name: bh-gh
+    key: username
