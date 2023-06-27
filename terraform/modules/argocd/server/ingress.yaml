@@ -1,0 +1,27 @@
+# -- Enable an ingress resource for the Argo CD server
+enabled: true
+# -- Additional ingress annotations
+annotations: {}
+# -- Additional ingress labels
+ingressClassName: "nginx"
+
+# -- List of ingress hosts
+## Argo Ingress.
+## Hostnames must be provided if Ingress is enabled.
+## Secrets must be manually created in the namespace
+hosts:
+  - "argocd-${cluster_name}.${account_name}.brevanhoward.io"
+
+# -- List of ingress paths
+paths:
+  - /
+# -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
+# pathType: Prefix
+extraPaths:
+  - path: /*
+    pathType: Prefix
+    backend:
+      service:
+        name: argocd-server
+        port:
+          number: 80
