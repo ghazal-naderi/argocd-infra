@@ -1,4 +1,4 @@
-- url: https://github.com/brevanhowardinfra/tf-aws-bh-eks-core-infra
+- url: https://github.com/ghazal-naderi/argocd-infra
   passwordSecret:
     name: bh-gh
     key: password
